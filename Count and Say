@@ -1,0 +1,42 @@
+class Solution {
+public:
+    string s="",newS="";
+    string countAndSay(int n) {
+        if(s.length()==0)
+        {
+            s="1";
+            n--;
+            countAndSay(n);//3->
+            return s;
+        }
+        else if(s.length()==1&&n!=0)
+        {
+            s="11";
+            n--;
+            countAndSay(n);//2->
+            return s;
+        }
+        else if(n!=0)
+        {
+            int count=1;
+            for(int i=0;i<s.length()-1;i++)
+            {
+                if(s[i]==s[i+1] && i!=s.length())
+                    count++;
+                else if(s[i]!=s[i+1])
+                {
+                    newS=newS+to_string(count)+s[i];
+                    count=1;    
+                }
+            }
+            newS=newS+to_string(count)+s[s.length()-1];
+            s=newS;
+            newS="";
+            n--;
+            countAndSay(n);//1->
+            return s;
+        }
+        else
+            return s;
+    }
+};
